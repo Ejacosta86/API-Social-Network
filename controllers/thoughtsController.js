@@ -80,3 +80,59 @@ async function deleteThought(req, res) {
 
 
 //get all reactions
+async function getReactions(req, res) {
+    try {
+        const thought = await Thought.findById(req.params.id);
+        res.json(thought.reactions);
+    } catch (err) {
+        res.status(404).json({ message: "Inalid thoughtId!" });
+    }
+}
+
+//add a reaction to a thought
+async function addReaction(req, res) {
+    try {
+        const thought = await Thought.findByIdAndUpdate( 
+            req.params.id, 
+            {
+              $push: { reactions: req.body}, 
+            },
+            { new: true }
+        );
+        res.json(thought);
+    } catch (err) {
+        res.status(404).json({ message: "Invalid thoughtId!"});
+    }
+}
+
+//delete reaction 
+async function deleteReaction(req, res) {
+    try {
+     const thought = await Thought.findByIdAndUpdate(
+        req.params.thoughtId,
+        {
+            $pull: { reactions: {_id: req.params.reactionId } },
+        },
+        { new: true }
+     );
+     if (thought) {
+        res.json(thought);
+     } else {
+        res.status(404).json({ message: "Invaild thoughtId!"});
+     }
+    } catch (err) {
+        res.status(404).json({ message: "Invaild thoughtId or reactionId!"});
+    }
+}
+
+
+module.export = {
+    getThoughts,
+    addThought,
+    getThought,
+    deleteThought,
+    updateThought,
+    getReactions,
+    addReaction,
+    deleteReaction,
+};
