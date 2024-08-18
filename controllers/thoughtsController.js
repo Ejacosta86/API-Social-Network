@@ -14,7 +14,7 @@ async function addThought( req, res) {
         if (user) {
             const thought = await Thought.create({
                 thoughtText: req.body.thoughtText,
-                username: user.usernamr,
+                username: user.username,
                 userId: user._id,
             });
             //find another user and add thought
@@ -28,7 +28,7 @@ async function addThought( req, res) {
         }
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Unable to creat thought! "});
+        res.status(500).json({ message: "Unable to create thought! "});
     }
 }
 
