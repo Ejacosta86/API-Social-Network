@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const formatDate = function (d) {
     return (
@@ -8,7 +8,7 @@ const formatDate = function (d) {
     );
 };
 
-const thoughtSchema = new Schema(
+const thoughtSchema = new mongoose.Schema(
     {
         thoughtText: {
             type: String,
@@ -21,8 +21,12 @@ const thoughtSchema = new Schema(
             get: formatDate,
             default: Date.now,
         },
+        username: {
+            type: String,
+            required: true,
+        },
         userId: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Types.ObjectId,
             ref: "users",
             required: true,
         },
@@ -35,7 +39,7 @@ const thoughtSchema = new Schema(
     }
 );
 
-    const reactSchema = new Schema(
+    const reactSchema = new mongoose.Schema(
         {
             reactionBody: {
                 type: String,
