@@ -126,7 +126,7 @@ async function deleteReaction(req, res) {
 }
 
 
-module.export = {
+module.exports = {
     getThoughts,
     addThought,
     getThought,
