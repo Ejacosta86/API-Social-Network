@@ -8,6 +8,31 @@ const formatDate = function (d) {
     );
 };
 
+const reactSchema = new mongoose.Schema(
+    {
+        reactionBody: {
+            type: String,
+            required: true,
+            maxLength: 280,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: formatDate,
+        },
+    },
+    {
+        toJSON:{
+            getters: true,
+        },
+    }
+);
+
+
 const thoughtSchema = new mongoose.Schema(
     {
         thoughtText: {
@@ -38,30 +63,6 @@ const thoughtSchema = new mongoose.Schema(
         }
     }
 );
-
-    const reactSchema = new mongoose.Schema(
-        {
-            reactionBody: {
-                type: String,
-                required: true,
-                maxLength: 280,
-            },
-            username: {
-                type: String,
-                required: true,
-            },
-            createdAt: {
-                type: Date,
-                default: Date.now,
-                get: formatDate,
-            },
-        },
-        {
-            toJSON:{
-                getters: true,
-            },
-        }
-    );
 
 const Thought = mongoose.model("thoughts", thoughtSchema);
 
