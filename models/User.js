@@ -8,7 +8,7 @@ let validateEmail = function (email) {
 const userSchema = new mongoose.Schema(
     {
         username: {
-            typr: String,
+            type: String,
             required: true,
             trim: true,
             unique: true,
@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema(
             unique: true,
             validate: [validateEmail, "please fill a vaild email address"],
         },
-        thoughts: [{ type: mongoose.Types.ObjectId, ref: "thoughts"}],
-        friends: [{ type: mongoose.Types.ObjectId, ref: "users"}],
+        thoughts: [{ type: mongoose.Types.ObjectId, ref: "thoughts" }],
+        friends: [{ type: mongoose.Types.ObjectId, ref: "users" }],
     },
     {
         toJSON: {

@@ -12,5 +12,5 @@ router.delete("/reloadDatabase", async (req, res) => {
     res.status(200).json({ message: "Database deleted!"});
 });
 
-model.exports = router;
+module.exports = router;
 
